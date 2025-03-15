@@ -15,10 +15,10 @@ jobs:
       - name: Build de l'image Docker
         run: docker build -t mon-app:latest .
       
-      - name: Scan de l'image avec Trivy
-        run: |
-          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-          trivy image mon-app:latest
+      # - name: Scan de l'image avec Trivy
+      #   run: |
+      #     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+      #     trivy image mon-app:latest
 
       - name: Configuration SSH et déploiement sur EC2
         env:

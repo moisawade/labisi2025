@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+      
+      - name: Build de l'image Docker
+        run: docker build -t mon-app:latest .
+      
+      - name: Scan de l'image avec Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+          trivy image mon-app:latest
+
+      - name: Configuration SSH et déploiement sur EC2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ubuntu
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+          scp -o StrictHostKeyChecking=no -i private_key deploy.sh $EC2_USER@$EC2_HOST:~/
+          ssh -o StrictHostKeyChecking=no -i private_key $EC2_USER@$EC2_HOST 'bash ~/deploy.sh'

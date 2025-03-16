@@ -7,10 +7,8 @@ on:
       - automate
 
 env:
-  IMAGE_TAG: 1.0.beta 
-  OPENSHIFT_URL: https://api.sandbox.x8i5.p1.openshiftapps.com:6443
-  CONTAINER_NAME: utilisateur/labisi2025
-  IMAGE_NAME: utilisateur/labisi2025:latest
+  CONTAINER_NAME: 'utilisateur/labisi2025'
+  IMAGE_NAME: 'utilisateur/labisi2025:latest'
 
 #Build de l'application et push de l'image sur le Registry Docker Hub
 jobs:
@@ -29,7 +27,7 @@ jobs:
       
       - name: Push Docker image to Docker Hub
         run: docker push $IMAGE_NAME
-        
+
 
 #Déploiement sur l'instance AWS EC2
   jobs:

@@ -4,7 +4,7 @@ name: CI/CD Pipeline 
 on:
   push:
     branches:
-      - automate
+      - main
 
 env:
   CONTAINER_NAME: 'utilisateur/labisi2025'
@@ -28,7 +28,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push $IMAGE_NAME
 
-        
+
 #Déploiement sur l'instance AWS EC2
   jobs:
     deploy:

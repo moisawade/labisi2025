@@ -6,14 +6,15 @@ on:
     branches:
       - main
 
-env:
-  CONTAINER_NAME: utilisateur/labisi2025
-  IMAGE_NAME: utilisateur/labisi2025:latest
+# env:
+#   CONTAINER_NAME: utilisateur/labisi2025
+#   IMAGE_NAME: utilisateur/labisi2025:latest
 
 #Build de l'application et push de l'image sur le Registry Docker Hub
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: WORKFLOW
 
     steps:
     - name: Checkout repository

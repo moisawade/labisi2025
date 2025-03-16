@@ -12,22 +12,21 @@ env:
 
 #Build de l'application et push de l'image sur le Registry Docker Hub
 jobs:
-- build:
-    runs-on: ubuntu-latest
+  - build:
+      runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       
-    - name: Build Docker image
-      run: docker build -t $IMAGE_NAME .
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME .
       
-    - name: Push Docker image to Docker Hub
-      run: docker push $IMAGE_NAME
-
+      - name: Push Docker image to Docker Hub
+        run: docker push $IMAGE_NAME
 
 # #Déploiement sur l'instance AWS EC2
 # - deploy:

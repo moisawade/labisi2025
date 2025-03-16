@@ -12,36 +12,36 @@ env:
 
 #Build de l'application et push de l'image sur le Registry Docker Hub
 jobs:
-- build:
-  runs-on: ubuntu-latest
+  - build:
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+#     - name: Log in to Docker Hub
+#       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       
-    - name: Build Docker image
-      run: docker build -t $IMAGE_NAME .
+#     - name: Build Docker image
+#       run: docker build -t $IMAGE_NAME .
       
-    - name: Push Docker image to Docker Hub
-      run: docker push $IMAGE_NAME
+#     - name: Push Docker image to Docker Hub
+#       run: docker push $IMAGE_NAME
 
 
-#Déploiement sur l'instance AWS EC2
-- deploy:
-    runs-on: self-hosted
+# #Déploiement sur l'instance AWS EC2
+# - deploy:
+#     runs-on: self-hosted
     
-    steps:
-      - name: Se connecter sur Docker Hub
-        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+#     steps:
+#       - name: Se connecter sur Docker Hub
+#         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-      - name: Arrêt du conteneur existant
-        run: 'sudo docker stop $CONTAINER_NAME || true'
+#       - name: Arrêt du conteneur existant
+#         run: 'sudo docker stop $CONTAINER_NAME || true'
 
-      - name: Suppression de l'image existante
-        run: 'sudo docker rmi $IMAGE_NAME || true'
+#       - name: Suppression de l'image existante
+#         run: 'sudo docker rmi $IMAGE_NAME || true'
 
-      - name: déploiement sur EC2
-        run: 'sudo docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME'
+#       - name: déploiement sur EC2
+#         run: 'sudo docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME'

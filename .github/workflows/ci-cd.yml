@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: WORKFLOW
 
+    run: echo "${{ env.IMAGE_NAME }}"
+    run: echo "${{ env.CONTAINER_NAME }}"
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -24,10 +27,10 @@ jobs:
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
       
     - name: Build Docker image
-      run: docker build -t "${{ env.$IMAGE_NAME }}" .
+      run: docker build -t "${{ env.IMAGE_NAME }}" .
       
     - name: Push Docker image to Docker Hub
-      run: docker push "${{ env.$IMAGE_NAME }}"
+      run: docker push "${{ env.IMAGE_NAME }}"
 
 # #Déploiement sur l'instance AWS EC2
 # - deploy:

@@ -32,7 +32,7 @@ jobs:
 #Déploiement sur l'instance AWS EC2
   jobs:
     deploy:
-      runs-on: self-hosted
+      runs-on: self-hosted
     
     steps:
       - name: Se connecter sur Docker Hub

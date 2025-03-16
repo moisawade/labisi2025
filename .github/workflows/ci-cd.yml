@@ -23,11 +23,6 @@ jobs:
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
     
-    
-    - name: Test variables environment
-      run: echo "${{ env.IMAGE_NAME }}"
-      run: echo "${{ env.CONTAINER_NAME }}"
-    
     - name: Build Docker image
       run: docker build -t "${{ env.IMAGE_NAME }}" .
       

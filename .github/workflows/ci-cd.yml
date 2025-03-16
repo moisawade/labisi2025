@@ -12,7 +12,7 @@ env:
 
 #Build de l'application et push de l'image sur le Registry Docker Hub
 jobs:
-  build:
+-  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,8 +30,7 @@ jobs:
 
 
 #Déploiement sur l'instance AWS EC2
-  jobs:
-    deploy:
+-  deploy:
       runs-on: self-hosted
     
     steps:

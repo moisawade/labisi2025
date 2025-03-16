@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Variables
-CONTAINER_NAME="l3isi-app"
-IMAGE_NAME="l3isi-app:latest"
+CONTAINER_NAME=" utilisateur/labisi2025"
+IMAGE_NAME=" utilisateur/labisi2025:latest"
 
 # Arrêt du conteneur existant
 sudo docker stop $CONTAINER_NAME || true

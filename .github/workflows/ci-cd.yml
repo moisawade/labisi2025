@@ -29,19 +29,20 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ vars.IMAGE_NAME }}
 
-# #Déploiement sur l'instance AWS EC2
-# - deploy:
-#     runs-on: self-hosted
+#Déploiement sur l'instance AWS EC2
+   deploy:
+    runs-on: self-hosted
+    environment: WORKFLOW
     
-#     steps:
-#       - name: Se connecter sur Docker Hub
-#         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+    steps:
+    - name: Se connecter sur Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-#       - name: Arrêt du conteneur existant
-#         run: 'sudo docker stop $CONTAINER_NAME || true'
+    - name: Arrêt du conteneur existant
+      run: 'sudo docker stop ${{ vars.CONTAINER_NAME }} || true'
 
-#       - name: Suppression de l'image existante
-#         run: 'sudo docker rmi $IMAGE_NAME || true'
+    - name: Suppression de l'image existante
+      run: 'sudo docker rmi ${{ vars.IMAGE_NAME }} || true'
 
-#       - name: déploiement sur EC2
-#         run: 'sudo docker run -d -p 80:80 --name $CONTAINER_NAME $IMAGE_NAME'
+    - name: déploiement sur EC2
+      run: 'sudo docker run -d -p 80:80 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}'

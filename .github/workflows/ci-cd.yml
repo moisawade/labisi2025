@@ -41,10 +41,10 @@ jobs:
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Arrêt du conteneur existant
-      run: 'sudo docker stop ${{ vars.CONTAINER_NAME }} || true'
+      run: sudo docker stop ${{ vars.CONTAINER_NAME }} || true
 
     - name: Suppression de l'image existante
-      run: 'sudo docker rmi ${{ vars.IMAGE_NAME }} || true'
+      run: sudo docker rmi ${{ vars.IMAGE_NAME }} || true
 
     - name: déploiement sur EC2
-      run: 'sudo docker run -d -p 80:80 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}'
+      run: sudo docker run -d -p 80:80 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}

@@ -41,7 +41,7 @@ jobs:
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
     - name: Arrêt du conteneur existant
-      run: docker stop "${{ vars.CONTAINER_NAME }}" || true
+      run: docker stop ${{ vars.CONTAINER_NAME }} || true
 
     - name: Suppression de l'image existante
       run: docker rmi "${{ vars.IMAGE_NAME }}" || true

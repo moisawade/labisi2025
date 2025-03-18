@@ -44,7 +44,7 @@ jobs:
       run: docker stop ${{ vars.CONTAINER_NAME }} || true
 
     - name: Suppression de l'image existante
-      run: docker rmi ${{ vars.CONTAINER_NAME }} || true
+      run: docker rm ${{ vars.CONTAINER_NAME }} || true
 
     - name: déploiement sur EC2
       run: docker run -d -p 80:80 --name ${{ vars.CONTAINER_NAME }} ${{ vars.IMAGE_NAME }}

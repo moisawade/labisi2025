@@ -42,6 +42,10 @@ jobs:
     environment: WORKFLOW
   
     steps:
+    - name: Sleep for 10 seconds
+      run: sleep 10s
+      shell: bash
+      
     - name: Se connecter sur Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 

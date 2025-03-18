@@ -6,6 +6,11 @@ on:
     branches:
       - main
 
+#Disabling concurrency
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # env:
 #   CONTAINER_NAME: utilisateur/labisi2025
 #   IMAGE_NAME: utilisateur/labisi2025:latest

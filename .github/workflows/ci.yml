@@ -3,7 +3,7 @@ name: CI Docker Débutant
 on:
   push:
     branches:
-      - main
+      - lab1
 
 jobs:
   build:
